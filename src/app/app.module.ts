@@ -17,13 +17,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { StatsComponent } from './pages/stats/stats.component';
 import { WipComponent } from './pages/wip/wip.component';
 import { CountriesComponent } from './pages/countries/countries.component';
-import { APP_BASE_HREF, CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { ChartModule } from 'primeng/chart';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {ChartModule} from 'primeng/chart';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [RestService, {provide: APP_BASE_HREF, useValue: '/covid-info/'}],
+  providers: [RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
