@@ -9,6 +9,9 @@ import * as moment from 'moment';
   styleUrls: ['./wip.component.scss']
 })
 export class WipComponent implements OnInit {
+  /**
+   * Config for storing all the values
+   */
   config: any = {
     countries: 0,
     isLoading: true,
@@ -44,13 +47,24 @@ export class WipComponent implements OnInit {
       }
     }
   }
+
+  /**
+   * Constructor Function
+   * @param rest Rest Service Instance
+   */
   constructor(private rest: RestService) { }
 
+  /**
+   * ngOnit Function
+   */
   ngOnInit(): void {
     this.config.date.setFullYear(this.config.date.getFullYear() - 1);
     this.getCountries();
   }
 
+  /**
+   * Fetch Country Lists
+   */
   getCountries() {
     let url = 'https://api.covid19api.com/countries';
     this.rest.getAPIData(url).subscribe((res) => {
@@ -64,6 +78,10 @@ export class WipComponent implements OnInit {
     })
   }
 
+  /**
+   * Convert API data into Chart Data
+   * @param res Response of API
+   */
   generateChartData(res: any) {
     let label: any = [], activeData: any = [], recovered: any = [], deaths: any = [];
     res.forEach((element: any) => {
@@ -100,7 +118,9 @@ export class WipComponent implements OnInit {
     };
   }
 
-
+  /**
+   * Fetch Country Wise Data
+   */
   fetchCountryData() {
     let url = "https://api.covid19api.com/live/country/" + this.config.selectedCity.Slug + "/status/confirmed/date/" + this.config.date.toJSON();
     this.rest.getAPIData(url).subscribe((res: any) => {
@@ -118,8 +138,10 @@ export class WipComponent implements OnInit {
     })
   }
 
-
-  countryChanged($event: any) {
+  /**
+   * On Country change call API
+   */
+  countryChanged() {
     this.config.isLoading = true;
     this.fetchCountryData();
   }

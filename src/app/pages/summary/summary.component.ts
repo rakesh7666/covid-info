@@ -10,18 +10,31 @@ import { RestService } from 'src/app/services/rest.service';
 
 
 export class SummaryComponent implements OnInit {
+  /**
+   * Config for storing all the values
+   */
   config: any = {
     summaryData: 0,
     isLoading: true,
     error: 0,
   }
 
+  /**
+   * Constructor Function
+   * @param rest Rest Service Instance
+   */
   constructor(private rest: RestService) { }
 
+  /**
+   * ngOnit Function
+   */
   ngOnInit(): void {
     this.getSummaryData();
   }
 
+  /**
+   * Fetch Summary Data
+   */
   getSummaryData() {
     let url = 'https://api.covid19api.com/summary';
     this.rest.getAPIData(url).subscribe((res) => {

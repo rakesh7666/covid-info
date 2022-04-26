@@ -8,6 +8,9 @@ import * as moment from 'moment';
   styleUrls: ['./countries.component.scss']
 })
 export class CountriesComponent implements OnInit {
+  /**
+   * Config for storing all the values
+   */
   config: any = {
     countries: 0,
     isLoading: true,
@@ -53,12 +56,23 @@ export class CountriesComponent implements OnInit {
       }
     }
   }
+
+  /**
+   * Constructor Function
+   * @param rest Rest Service Instance
+   */
   constructor(private rest: RestService) { }
 
+  /**
+   * ngOnit Function
+   */
   ngOnInit(): void {
     this.getCountries();
   }
 
+  /**
+   * Fetch Country Lists
+   */
   getCountries() {
     let url = 'https://api.covid19api.com/countries';
     this.rest.getAPIData(url).subscribe((res) => {
@@ -72,6 +86,10 @@ export class CountriesComponent implements OnInit {
     })
   }
 
+  /**
+   * Convert API data into Chart Data
+   * @param res Response of API
+   */
   generateChartData(res: any) {
     let label: any = [], data: any = [];
     res.forEach((element: any) => {
@@ -92,10 +110,16 @@ export class CountriesComponent implements OnInit {
     };
   }
 
+  /**
+   * On Options change call API
+   */
   optionChanged() {
     this.fetchCountryData(this.config.selectedCity.Country);
   }
 
+  /**
+   * Fetch Country Wise Data
+   */
   fetchCountryData(country: string) {
     let url = "https://api.covid19api.com/country/" + country + "/status/" + this.config.selectedOption;
     this.rest.getAPIData(url).subscribe((res: any) => {
@@ -113,6 +137,9 @@ export class CountriesComponent implements OnInit {
     })
   }
 
+  /**
+   * On Country change call API
+   */
   countryChanged($event: any) {
     this.config.isLoading = true;
     let country = $event.value.Country;

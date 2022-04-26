@@ -9,17 +9,31 @@ import * as moment from 'moment';
   styleUrls: ['./stats.component.scss']
 })
 export class StatsComponent implements OnInit {
+  /**
+   * Config for storing all the values
+   */
   config: any = {
     stats: [],
     isLoading: true,
     error: 0,
   }
+
+  /**
+   * Constructor Function
+   * @param rest Rest Service Instance
+   */
   constructor(private rest: RestService) { }
 
+  /**
+   * ngOnit Function
+   */
   ngOnInit(): void {
     this.getStats();
   }
 
+  /**
+   * Fetch Overall Stats
+   */
   getStats() {
     let url = 'https://api.covid19api.com/stats';
     this.rest.getAPIData(url).subscribe((res: any) => {
