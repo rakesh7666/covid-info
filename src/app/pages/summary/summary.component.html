@@ -1,0 +1,85 @@
+<div *ngIf="!config.isLoading && !config.error" class="container">
+    <div class="global-update my-3">
+        <div class="d-sm-flex justify-content-between align-items-end mb-2">
+            <h1 class="mb-0">Global Updates</h1>
+            <small>Updated on: {{config.summaryData.Global.Date | date}}</small>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="update-cards">
+                    <div class="count">{{config.summaryData.Global.TotalConfirmed | number:'1.0'}}</div>
+                    <h3 class="global-title">Total Cases</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="update-cards text-success">
+                    <div class="count ">{{config.summaryData.Global.NewRecovered | number:'1.0'}}</div>
+                    <h3 class="global-title">Total Recovered</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="update-cards text-danger">
+                    <div class="count ">{{config.summaryData.Global.TotalDeaths | number:'1.0'}}</div>
+                    <h3 class="global-title">Total Deaths</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="update-cards">
+                    <div class="count">{{config.summaryData.Global.TotalConfirmed | number:'1.0'}}</div>
+                    <h3 class="global-title">Total Cases</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="update-cards text-success">
+                    <div class="count ">{{config.summaryData.Global.NewRecovered | number:'1.0'}}</div>
+                    <h3 class="global-title">Total Recovered</h3>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="update-cards text-danger">
+                    <div class="count ">{{config.summaryData.Global.TotalDeaths | number:'1.0'}}</div>
+                    <h3 class="global-title">Total Deaths</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="country-wise-data">
+        <h1>Country Wise Tabular Data</h1>
+        <p-table [value]="config.summaryData.Countries" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+            responsiveLayout="stack" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[10,25,50]">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="Country">Country <p-sortIcon field="Country"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="CountryCode">CountryCode <p-sortIcon field="CountryCode"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="Date">Date <p-sortIcon field="Date"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="TotalConfirmed">TotalConfirmed <p-sortIcon field="TotalConfirmed"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="TotalDeaths">TotalDeaths <p-sortIcon field="TotalDeaths"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="TotalRecovered">TotalRecovered <p-sortIcon field="TotalRecovered"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td><span class="p-column-title">Country</span>{{item.Country}}</td>
+                    <td><span class="p-column-title">CountryCode</span>{{item.CountryCode}}</td>
+                    <td><span class="p-column-title">Date</span>{{item.Date | date}}</td>
+                    <td><span class="p-column-title">TotalConfirmed</span>{{item.TotalConfirmed | number:'1.0'}}</td>
+                    <td><span class="p-column-title">TotalDeaths</span>{{item.TotalDeaths | number:'1.0'}}</td>
+                    <td><span class="p-column-title">TotalRecovered</span>{{item.TotalRecovered | number:'1.0'}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<div class="loading" *ngIf="config.isLoading">
+    <img src="assets/images/loader.gif" class="img-fluid">
+</div>

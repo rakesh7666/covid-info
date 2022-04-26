@@ -1,0 +1,22 @@
+<div *ngIf="!config.isLoading" class="container">
+    <div class="d-sm-flex justify-content-end align-items-center my-3">
+        <h3 class="mb-0 mx-2">Select Country :</h3>
+        <p-dropdown [options]="config.countries" [filter]="true" [(ngModel)]="config.selectedCity" optionLabel="Country"
+            placeholder="Select a Country" (onChange)="countryChanged($event)"></p-dropdown>
+    </div>
+    <div class="d-sm-flex align-items-center justify-content-center mb-4" *ngIf="config.selectedCity">
+        <h3 class="mb-0 mx-2">Select Options :</h3>
+        <p-radioButton class="mx-2" *ngFor="let opt of config.options" name="options" [value]="opt.value"
+            [(ngModel)]="config.selectedOption" [label]="opt.label" (ngModelChange)="optionChanged()"></p-radioButton>
+    </div>
+    <p-chart *ngIf="config.chartData" type="line" [data]="config.chartData" [options]="config.chartOptions"></p-chart>
+</div>
+<div class="d-flex justify-content-center align-items-center py-5" *ngIf="!config.selectedCity">
+    <h1>Select City to Fetch Data</h1>
+</div>
+<div class="loading" *ngIf="config.isLoading">
+    <img src="assets/images/loader.gif" class="img-fluid">
+</div>
+<div *ngIf="!config.isLoading && config.error">
+    <h3 class="mb-0 text-center">No Data Found</h3>
+</div>

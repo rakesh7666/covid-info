@@ -6,5 +6,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'covid-info';
+  menuItems: any;
+
+  constructor() {
+    this.menuItems = [
+      {
+        link: '',
+        name: 'Summary'
+      },
+      {
+        link: 'countries',
+        name: 'Countries'
+      },
+      {
+        link: 'wip',
+        name: 'World Total WIP'
+      },
+      {
+        link: 'stats',
+        name: 'Get Stats'
+      }
+    ]
+  }
 }
