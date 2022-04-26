@@ -14,7 +14,7 @@ export class StatsComponent implements OnInit {
     isLoading: true,
     error: 0,
   }
-  constructor(private rest: RestService, private datePipe: DatePipe) { }
+  constructor(private rest: RestService) { }
 
   ngOnInit(): void {
     this.getStats();
